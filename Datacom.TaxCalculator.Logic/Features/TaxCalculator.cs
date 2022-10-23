@@ -17,31 +17,41 @@ namespace Datacom.TaxCalculator.Logic.Features
             var taxSum = 0.0M;
             foreach(var tableEntry in taxTable)
             {
+                var upper = !tableEntry.Upper.HasValue ? decimal.MaxValue : tableEntry.Upper.Value;
+                var lower = !tableEntry.Lower.HasValue ? 0.0M : tableEntry.Lower.Value;
+
                 var rangeDifference = tableEntry.Upper - tableEntry.Lower;
 
                 var sumdifference = annualSalary - sum;
 
                 if (sumdifference > rangeDifference)
                 {
-                    sum += rangeDifference;
-                    taxSum += rangeDifference * tableEntry.TaxRate;
+                    sum += rangeDifference.Value;
+                    taxSum += rangeDifference.Value * (decimal)(tableEntry.TaxRate/100);
                 }
                 else
                 {
-                    taxSum += sumdifference * tableEntry.TaxRate;
+                    taxSum += sumdifference * (decimal)(tableEntry.TaxRate/100);
                     break;
                 }   
             }
 
             var incomeTax = Math.Round(taxSum / 12,2);
-            var netIncome = annualSalary - incomeTax;
             var grossIncome = Math.Round(annualSalary / 12,2);
-            var superIncome = Math.Round(grossIncome * userTax.SuperRate,2);
+            var netIncome = grossIncome - incomeTax;
+            var superIncome = Math.Round(grossIncome * (userTax.SuperRate/100),2);
 
             userTax.IncomeTax = incomeTax;
             userTax.NetIncome = netIncome;
             userTax.GrossIncome = grossIncome;
             userTax.SuperAmount = superIncome;
+
+            DateTime.TryParse($"{userTax.PayPeriod} 1, {DateTime.Now.Year}",out DateTime date);
+
+            var firstDayofMonth = date.ToString("dd MMMMM");
+            var lastDayofMonth = date.AddMonths(1).AddDays(-1).ToString("dd MMMMM");
+
+            userTax.PayPeriod = $"{firstDayofMonth} - {lastDayofMonth}";
         }
     }
 }

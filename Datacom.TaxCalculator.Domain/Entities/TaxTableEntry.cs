@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Datacom.TaxCalculator.Domain.Entities
 {
+    
+    
     public class TaxTableEntry
     {
-        public int Upper { get; set; }
-        public int Lower { get; set; }
-        public int TaxRate { get; set; }
+        public decimal? Upper { get; set; }
+        public decimal? Lower { get; set; }
+        public double TaxRate { get; set; }
     }
 }

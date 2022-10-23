@@ -36,8 +36,7 @@ namespace Datacom.TaxCalculator.Infrastructure.Data
                         var line = await reader.ReadLineAsync();
                         if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
                         {
-                            numline++;
-                            continue;
+                            throw new Exception("Csv entry cannot be empty or whitespace");
                         }
                         var values = line.Split(',');
 
@@ -51,8 +50,9 @@ namespace Datacom.TaxCalculator.Infrastructure.Data
                     {
                         _logger.LogError(ex, ex.Message);
                         csvEntryData.ErrorMessages.Add(ex.Message);
-                        continue;
+                        
                     }
+                    numline++;
                 }
 
                 return csvEntryData;

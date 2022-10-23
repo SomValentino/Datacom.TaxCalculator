@@ -12,7 +12,7 @@ namespace Datacom.TaxCalculator.Infrastructure
 {
     public static class ServiceInstaller
     {
-        public static void AddTaxCalculatorInfrastructure(this IServiceCollection services)
+        public static void AddTaxCalculatorInfrastructureInstaller(this IServiceCollection services)
         {
             services.AddScoped<IDataContext, CsvDataContext>();
             services.AddScoped<IDataValidator, CsvDataEntryValidator>();
