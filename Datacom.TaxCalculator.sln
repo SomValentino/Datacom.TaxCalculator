@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datacom.TaxCalculator.Domain", "Datacom.TaxCalculator.Domain\Datacom.TaxCalculator.Domain.csproj", "{8F13775B-A4ED-4313-9C77-FDA58EDA0CDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datacom.TaxCalculator.Infrastructure", "Datacom.TaxCalculator.Infrastructure\Datacom.TaxCalculator.Infrastructure.csproj", "{510CD58A-391C-4DE8-A4DE-BF8F568E4795}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datacom.TaxCalculator.Logic", "Datacom.TaxCalculator.Logic\Datacom.TaxCalculator.Logic.csproj", "{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F13775B-A4ED-4313-9C77-FDA58EDA0CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F13775B-A4ED-4313-9C77-FDA58EDA0CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F13775B-A4ED-4313-9C77-FDA58EDA0CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F13775B-A4ED-4313-9C77-FDA58EDA0CDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{510CD58A-391C-4DE8-A4DE-BF8F568E4795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{510CD58A-391C-4DE8-A4DE-BF8F568E4795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{510CD58A-391C-4DE8-A4DE-BF8F568E4795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{510CD58A-391C-4DE8-A4DE-BF8F568E4795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37A02E03-010C-44F5-88D8-0E6D1FCA730B}
+	EndGlobalSection
+EndGlobal
