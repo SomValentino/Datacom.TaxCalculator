@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datacom.TaxCalculator.Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datacom.TaxCalculator.Infrastructure", "Datacom.TaxCalculator.Infrastructure\Datacom.TaxCalculator.Infrastructure.csproj", "{510CD58A-391C-4DE8-A4DE-BF8F568E4795}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datacom.TaxCalculator.Logic", "Datacom.TaxCalculator.Logic\Datacom.TaxCalculator.Logic.csproj", "{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datacom.TaxCalculator.Logic", "Datacom.TaxCalculator.Logic\Datacom.TaxCalculator.Logic.csproj", "{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datacom.TaxCalculator.Tests", "Datacom.TaxCalculator.Tests\Datacom.TaxCalculator.Tests.csproj", "{930D27A4-ABE6-4826-831F-7831CECC40C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B9B40214-E2F8-4DDD-AF8C-FF510D13DB71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +31,16 @@ Global
 		{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7257A5B-F414-42C7-ACDC-9D99D4F4BC19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{930D27A4-ABE6-4826-831F-7831CECC40C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{930D27A4-ABE6-4826-831F-7831CECC40C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{930D27A4-ABE6-4826-831F-7831CECC40C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{930D27A4-ABE6-4826-831F-7831CECC40C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{930D27A4-ABE6-4826-831F-7831CECC40C3} = {B9B40214-E2F8-4DDD-AF8C-FF510D13DB71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {37A02E03-010C-44F5-88D8-0E6D1FCA730B}
