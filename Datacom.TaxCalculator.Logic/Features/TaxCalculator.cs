@@ -20,14 +20,14 @@ namespace Datacom.TaxCalculator.Logic.Features
                 var upper = !tableEntry.Upper.HasValue ? decimal.MaxValue : tableEntry.Upper.Value;
                 var lower = !tableEntry.Lower.HasValue ? 0.0M : tableEntry.Lower.Value;
 
-                var rangeDifference = tableEntry.Upper - tableEntry.Lower;
+                var rangeDifference = upper - lower;
 
                 var sumdifference = annualSalary - sum;
 
                 if (sumdifference > rangeDifference)
                 {
-                    sum += rangeDifference.Value;
-                    taxSum += rangeDifference.Value * (decimal)(tableEntry.TaxRate/100);
+                    sum += rangeDifference;
+                    taxSum += rangeDifference * (decimal)(tableEntry.TaxRate/100);
                 }
                 else
                 {

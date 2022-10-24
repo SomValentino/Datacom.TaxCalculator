@@ -20,11 +20,11 @@ namespace Datacom.TaxCalculator.Logic.Features
         private readonly ILogger<TaxManager> _logger;
 
         public TaxManager(ITaxCalculator taxCalculator, IDataContext context,
-            IOptions<IEnumerable<TaxTableEntry>> taxTable, ILogger<TaxManager> logger)
+            IEnumerable<TaxTableEntry> taxTable, ILogger<TaxManager> logger)
         {
             _taxCalculator = taxCalculator;
             _context = context;
-            _taxTable = taxTable.Value;
+            _taxTable = taxTable;
             _logger = logger;
         }
         public async Task<BatchProcessResult> BatchProcessAsync(string csvSourceFile)

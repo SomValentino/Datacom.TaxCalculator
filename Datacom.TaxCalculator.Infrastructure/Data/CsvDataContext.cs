@@ -36,15 +36,13 @@ namespace Datacom.TaxCalculator.Infrastructure.Data
                         var line = await reader.ReadLineAsync();
                         if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
                         {
-                            throw new Exception("Csv entry cannot be empty or whitespace");
+                            throw new Exception($"Csv entry cannot be empty or whitespace at line: {numline}");
                         }
                         var values = line.Split(',');
 
                         UserTax userTax = _dataValidator.Validate(values, numline);
 
                         csvEntryData.UserTaxes.Add(userTax);
-
-                        numline++;
                     }
                     catch (Exception ex)
                     {

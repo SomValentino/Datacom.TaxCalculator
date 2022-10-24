@@ -16,15 +16,12 @@ namespace Datacom.TaxCalculator.Tests
     public class TaxCalculatorTests
     {
         private readonly ServiceProvider serviceProvider;
-        private readonly List<TaxTableEntry> taxTable;
+        private readonly IEnumerable<TaxTableEntry> taxTable;
 
         public TaxCalculatorTests()
         {
             serviceProvider = Startup.CreateServiceProvider();
-            var configuration = serviceProvider.GetService<IConfiguration>();
-            taxTable = JsonConvert.DeserializeObject<List<TaxTableEntry>>(configuration["TaxTableEntry"]);
-
-
+            taxTable = serviceProvider.GetService<IEnumerable<TaxTableEntry>>();
         }
 
         [Fact]
@@ -72,6 +69,30 @@ namespace Datacom.TaxCalculator.Tests
             Assert.Equal(userTax.IncomeTax, 2543.33M);
             Assert.Equal(userTax.NetIncome, 7456.67M);
             Assert.Equal(userTax.SuperAmount, 1000.00M);
+
+        }
+
+        [Fact]
+        public void TaxCalculator_WhenAnnualSalaryIs250000_ReturnsPayRoll()
+        {
+            var taxCalculator = serviceProvider.GetService<ITaxCalculator>();
+
+            var userTax = new UserTax
+            {
+                FirstName = "Test",
+                LastName = "Test",
+                AnnualSalary = 250000,
+                SuperRate = 9,
+                PayPeriod = "February"
+            };
+
+            taxCalculator.Calculate(taxTable, userTax);
+
+            Assert.Equal(userTax.PayPeriod, $"01 February - 28 February");
+            Assert.Equal(userTax.GrossIncome, 20833.33M);
+            Assert.Equal(userTax.IncomeTax, 6468.33M);
+            Assert.Equal(userTax.NetIncome, 14365.00M);
+            Assert.Equal(userTax.SuperAmount, 1875.00M);
 
         }
     }

@@ -4,11 +4,16 @@ using Datacom.TaxCalculator.Logic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Datacom.TaxCalculator.Infrastructure.Data;
+using Microsoft.Extensions.Logging.Abstractions;
+using Datacom.TaxCalculator.Logic.Features;
 
 namespace Datacom.TaxCalculator.Tests.Setup
 {
@@ -35,9 +40,19 @@ namespace Datacom.TaxCalculator.Tests.Setup
             {
                 return configuration;
             });
-            
+
+
+            services.AddSingleton<IEnumerable<TaxTableEntry>>(options =>
+            {
+
+                return JsonConvert.DeserializeObject<List<TaxTableEntry>>(configuration["TaxTableEntry"]);
+
+
+            });
             services.AddTaxCalculatorInfrastructureInstaller();
             services.AddTaxCalculatorLogicInstaller();
+            services.AddScoped<ILogger<CsvDataContext>, NullLogger<CsvDataContext>>();
+            services.AddScoped<ILogger<TaxManager>, NullLogger<TaxManager>>();
 
             var svcProvider = services.BuildServiceProvider();
 
