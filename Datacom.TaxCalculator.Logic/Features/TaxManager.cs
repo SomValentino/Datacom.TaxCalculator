@@ -60,12 +60,14 @@ namespace Datacom.TaxCalculator.Logic.Features
                 var numoffailedReads = csvEntryData.ErrorMessages.Count;
                 var totalReads = numofsuccessReads + numoffailedReads;
 
-                return new BatchProcessResult { 
+                var result = new BatchProcessResult { 
                     Success = totalReads > 0 && numofsuccessReads == totalReads,
                     NumberOfFailedReads = numoffailedReads,
                     NumberOfSuccessfulReads = numofsuccessReads,
                     ErrorMessage = string.Join("\n", csvEntryData.ErrorMessages)
                 };
+
+                return result;
             }
             catch(FileNotFoundException ex)
             {

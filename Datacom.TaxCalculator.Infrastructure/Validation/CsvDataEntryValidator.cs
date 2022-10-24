@@ -15,31 +15,42 @@ namespace Datacom.TaxCalculator.Infrastructure.Validation
         {
             var userTax = new UserTax();
 
-            if (values.Length == 0 && string.IsNullOrWhiteSpace(values[0]) || string.IsNullOrEmpty(values[0]))
+            if (values.Length >= 1 && string.IsNullOrWhiteSpace(values[0]) || string.IsNullOrEmpty(values[0]))
             {
                 throw new CsvInvaildEntryException($"FirstName is required and cannot be empty at line: {numline}");
             }
             else userTax.FirstName = values[0];
 
-            if (values.Length <= 1 && string.IsNullOrWhiteSpace(values[1]) || string.IsNullOrEmpty(values[1]))
+            if (values.Length >= 2 && string.IsNullOrWhiteSpace(values[1]) || string.IsNullOrEmpty(values[1]))
             {
                 throw new CsvInvaildEntryException($"LastName is required and cannot be empty at line: {numline}");
             }
             else userTax.LastName = values[1];
 
-            if (values.Length <= 2 && !decimal.TryParse(values[2], out decimal annualSalary) && annualSalary <= 0.0M)
+            decimal result = 0.0M;
+            if (values.Length >= 3 && !decimal.TryParse(values[2], out result))
             {
-                throw new CsvInvaildEntryException($"Cannot parse annualSalary as an invalid value was passed at: {numline}");
-            }
-            else userTax.AnnualSalary = decimal.Parse(values[2]);
 
-            if (values.Length <= 3 && !decimal.TryParse(values[3].Substring(0, values[3].Length - 1), out decimal superRate) && (superRate < 0.0M || superRate > 50.00M))
+                throw new CsvInvaildEntryException($"Cannot parse annual salary as an invalid value was passed at: {numline}");
+
+            }
+            else if (result <= 0.0M)
+            {
+                throw new CsvInvaildEntryException($"Cannot parse annual salary as an invalid value was passed at: {numline}");
+            }
+            else userTax.AnnualSalary = result;
+            decimal superRate = 0.0M;
+            if (values.Length >= 4 && !decimal.TryParse(values[3].Substring(0, values[3].Length - 1), out superRate))
             {
                 throw new CsvInvaildEntryException($"Cannot parse super rate as an invalid value was passed at: {numline}");
             }
+            else if (superRate < 0.0M || superRate > 50.0M)
+            {
+                throw new CsvInvaildEntryException($"Super Rate must be between 0 and 50 percent inclusive at line : {numline}");
+            }
             else userTax.SuperRate = decimal.Parse(values[3].Substring(0, values[3].Length - 1));
 
-            if (values.Length <= 4 && (string.IsNullOrWhiteSpace(values[4]) || string.IsNullOrEmpty(values[4])))
+            if (values.Length >= 5 && (string.IsNullOrWhiteSpace(values[4]) || string.IsNullOrEmpty(values[4])))
             {
                 throw new CsvInvaildEntryException($"Pay period is required and cannot be empty at line: {numline}");
             }
