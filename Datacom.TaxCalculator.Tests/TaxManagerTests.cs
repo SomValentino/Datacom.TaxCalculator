@@ -41,5 +41,27 @@ namespace Datacom.TaxCalculator.Tests
                 "FirstName is required and cannot be empty at line: 7\n" +
                 "LastName is required and cannot be empty at line: 8");
         }
+
+        [Fact]
+        public async Task TaxManager_LoadCSVThatDoesNotExist_ReturnsBatchResultWithErrorMessage()
+        {
+            var taxManger = serviceProvider.GetService<ITaxManager>();
+
+            var batchProcessResult = await taxManger.BatchProcessAsync("inputxxx.csv");
+
+            Assert.Equal(batchProcessResult.Success, false);
+            Assert.Equal(batchProcessResult.ErrorMessage, "The csv file inputxxx.csv does not exist.");
+        }
+
+        [Fact]
+        public async Task TaxManager_LoadCSVWithoutProvidingDestinationPath_SavesOutputFileInsameDirectoryAsInputFile()
+        {
+            var taxManger = serviceProvider.GetService<ITaxManager>();
+
+            var batchProcessResult = await taxManger.BatchProcessAsync("input.csv");
+
+            Assert.Equal(File.Exists("inputOutput.csv"), true);   
+        }
+
     }
 }

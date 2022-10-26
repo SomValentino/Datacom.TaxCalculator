@@ -10,6 +10,6 @@ namespace Datacom.TaxCalculator.Logic.Contracts
 {
     public interface ITaxManager
     {
-        Task<BatchProcessResult> BatchProcessAsync(string csvSourceFile);
+        Task<BatchProcessResult> BatchProcessAsync(string csvSourceFile, string destinationFile = null);
     }
 }

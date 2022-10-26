@@ -27,11 +27,11 @@ namespace Datacom.TaxCalculator.Logic.Features
             _taxTable = taxTable;
             _logger = logger;
         }
-        public async Task<BatchProcessResult> BatchProcessAsync(string csvSourceFile)
+        public async Task<BatchProcessResult> BatchProcessAsync(string csvSourceFile, string destinationFile = null)
         {
             try
             {
-                if(!File.Exists(csvSourceFile)) throw new FileNotFoundException("The csv file {file} does not exist.", csvSourceFile);
+                if(!File.Exists(csvSourceFile)) throw new FileNotFoundException($"The csv file {csvSourceFile} does not exist.");
 
                 _logger.LogInformation("Fetching tax data from csv file {file}", csvSourceFile);
 
@@ -48,10 +48,33 @@ namespace Datacom.TaxCalculator.Logic.Features
 
                 _logger.LogInformation("Finished performing tax calculations");
 
-                var outputFileName = $"{csvSourceFile}Output.csv";
+                var directoryPath = Path.GetDirectoryName(csvSourceFile);
+
+                var inputPutFileName = Path.GetFileName(csvSourceFile).Split(".")[0];
+
+                var outputFileName = string.Empty;
+
+                if (!string.IsNullOrEmpty(destinationFile) && !string.IsNullOrWhiteSpace(destinationFile))
+                {
+                    var outputFile= Path.GetFileName(destinationFile);
+
+                    if (string.IsNullOrEmpty(Path.GetExtension(outputFile)) && string.IsNullOrWhiteSpace(Path.GetExtension(outputFile)))
+                    {
+                        outputFileName = Path.Combine(destinationFile, $"{inputPutFileName}Output.csv");
+                    }
+                    else
+                    {
+                        outputFileName = destinationFile;
+                    }
+                }
+                else
+                {
+                    outputFileName = Path.Combine(directoryPath, $"{inputPutFileName}Output.csv");
+                }
 
                 _logger.LogInformation("Started writing tax output data to file: {file}", outputFileName);
 
+                
                 await _context.Write(csvEntryData.UserTaxes, outputFileName);
 
                 _logger.LogInformation("Completed writing tax output data to file: {file}", outputFileName);
