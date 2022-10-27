@@ -1,0 +1,38 @@
+﻿@model Datacom.TaxCalculator.WebApp.Models.BatchProcessResultViewModel
+@{
+    ViewData["Title"] = "Process Page";
+}
+
+<div>
+    <h4>Batch Process Result</h4>
+    @if(Model != null)
+    {
+        <div>
+            <span><b>Number of lines successfully processed</b>: @Model.Model.NumberOfSuccessfulReads</span><br/>
+            <span><b>Number of lines failed to process</b>: @Model.Model.NumberOfFailedReads</span><br/><br/>
+            @if(!string.IsNullOrEmpty(Model.Model.ErrorMessage) || !string.IsNullOrWhiteSpace(Model.Model.ErrorMessage))
+            {
+                <h6>Error messages in input file</h6>
+                var list = Model.Model.ErrorMessage.Split('\n');
+                <ul>
+                    @foreach(var error in list)
+                    {
+                        <li style="color:red">@error<br/></li>   
+                    }
+                </ul>
+                
+                
+            }
+            <br/><br/>
+            @if(@Model.Model.NumberOfSuccessfulReads > 0)
+            {
+                <span><a asp-action="Download"
+                            asp-route-filename="@Model.Model.OutputFileName">
+                            @Model.Model.OutputFileName
+                      </a></span>
+            }
+        </div>
+    }
+    <br/><br/>
+    <a class="btn btn-danger" asp-action="Index">Back</a>
+</div>

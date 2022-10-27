@@ -11,6 +11,8 @@ namespace Datacom.TaxCalculator.Logic.Models
         public bool Success { get; set; }
         public int NumberOfSuccessfulReads { get; set; }
         public int NumberOfFailedReads { get; set; }
+        public string OutputFileName { get; set; }
+
         public string ErrorMessage { get; set; }
     }
 }

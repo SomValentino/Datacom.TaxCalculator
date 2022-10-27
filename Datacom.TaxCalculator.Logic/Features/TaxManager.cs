@@ -90,6 +90,11 @@ namespace Datacom.TaxCalculator.Logic.Features
                     ErrorMessage = string.Join("\n", csvEntryData.ErrorMessages)
                 };
 
+                if(result.NumberOfSuccessfulReads > 0)
+                {
+                    result.OutputFileName = outputFileName;
+                }
+
                 return result;
             }
             catch(FileNotFoundException ex)

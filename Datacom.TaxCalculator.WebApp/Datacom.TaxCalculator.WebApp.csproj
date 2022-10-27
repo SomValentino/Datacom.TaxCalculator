@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Datacom.TaxCalculator.Infrastructure\Datacom.TaxCalculator.Infrastructure.csproj" />
+    <ProjectReference Include="..\Datacom.TaxCalculator.Logic\Datacom.TaxCalculator.Logic.csproj" />
+  </ItemGroup>
+
+</Project>

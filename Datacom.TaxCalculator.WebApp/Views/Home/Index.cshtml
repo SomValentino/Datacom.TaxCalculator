@@ -1,0 +1,40 @@
+﻿@model Datacom.TaxCalculator.WebApp.Models.FileUploadModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form asp-controller="Home" asp-action="Index" method="post"
+      enctype="multipart/form-data">
+    
+    <input type="file" name="file" />
+    <p style="color:red">*Upload only .csv file extension and max size of 5MB</p><br/>
+
+    @if (Model.FileUploadSuccess)
+    {
+        <div>
+            <span>
+                <p style="color:green">@Model.Message</p>
+            </span>
+        </div>
+    }
+    else
+    {
+        <div>
+            <span>
+                <p style="color:green">@Model.Message</p>
+            </span>
+        </div>
+    }
+
+
+    
+    @if (Model.FileUploadSuccess)
+    {
+        <button class="btn btn-success" type="submit" asp-action="Process" asp-route-filename="@Model.FileNameUploaded">Process File</button>
+    }
+    else
+    {
+        <button type="submit">Upload File</button>
+    }
+
+</form>
