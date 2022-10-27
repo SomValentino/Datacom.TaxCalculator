@@ -13,6 +13,17 @@ namespace Datacom.TaxCalculator.Logic.Features
         public void Calculate(IEnumerable<TaxTableEntry> taxTable, UserTax userTax)
         {
             var annualSalary = userTax.AnnualSalary;
+
+            DateTime.TryParse($"{userTax.PayPeriod} 1, {DateTime.Now.Year}", out DateTime date);
+
+            var firstDayofMonth = date.ToString("dd MMMMM");
+            var lastDayofMonth = date.AddMonths(1).AddDays(-1).ToString("dd MMMMM");
+
+            userTax.PayPeriod = $"{firstDayofMonth} - {lastDayofMonth}";
+
+            if (annualSalary < taxTable.ToList()[0].Upper)
+                return;
+
             var sum = 0.0M;
             var taxSum = 0.0M;
             foreach(var tableEntry in taxTable)
@@ -37,21 +48,8 @@ namespace Datacom.TaxCalculator.Logic.Features
             }
 
             var incomeTax = Math.Round(taxSum / 12,2);
-            var grossIncome = Math.Round(annualSalary / 12,2);
-            var netIncome = grossIncome - incomeTax;
-            var superIncome = Math.Round(grossIncome * (userTax.SuperRate/100),2);
 
             userTax.IncomeTax = incomeTax;
-            userTax.NetIncome = netIncome;
-            userTax.GrossIncome = grossIncome;
-            userTax.SuperAmount = superIncome;
-
-            DateTime.TryParse($"{userTax.PayPeriod} 1, {DateTime.Now.Year}",out DateTime date);
-
-            var firstDayofMonth = date.ToString("dd MMMMM");
-            var lastDayofMonth = date.AddMonths(1).AddDays(-1).ToString("dd MMMMM");
-
-            userTax.PayPeriod = $"{firstDayofMonth} - {lastDayofMonth}";
         }
     }
 }

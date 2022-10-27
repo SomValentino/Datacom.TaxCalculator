@@ -95,5 +95,29 @@ namespace Datacom.TaxCalculator.Tests
             Assert.Equal(userTax.SuperAmount, 1875.00M);
 
         }
+
+        [Fact]
+        public void TaxCalculator_WhenAnnualSalaryIs10000_ReturnsPayRoll()
+        {
+            var taxCalculator = serviceProvider.GetService<ITaxCalculator>();
+
+            var userTax = new UserTax
+            {
+                FirstName = "Test",
+                LastName = "Test",
+                AnnualSalary = 10000,
+                SuperRate = 9,
+                PayPeriod = "February"
+            };
+
+            taxCalculator.Calculate(taxTable, userTax);
+
+            Assert.Equal(userTax.PayPeriod, $"01 February - 28 February");
+            Assert.Equal(userTax.GrossIncome, 833.33M);
+            Assert.Equal(userTax.IncomeTax, 0.00M);
+            Assert.Equal(userTax.NetIncome, 833.33M);
+            Assert.Equal(userTax.SuperAmount, 75.00M);
+
+        }
     }
 }
