@@ -17,17 +17,17 @@ namespace Datacom.TaxCalculator.Logic.Features
             var taxSum = 0.0M;
             foreach(var tableEntry in taxTable)
             {
-                var upper = !tableEntry.Upper.HasValue ? decimal.MaxValue : tableEntry.Upper.Value;
-                var lower = !tableEntry.Lower.HasValue ? 0.0M : tableEntry.Lower.Value;
+                var upper = tableEntry.Upper;
+                var lower = tableEntry.Lower;
 
-                var rangeDifference = upper - lower;
+                var rangeDifference = upper.HasValue ? upper - lower : null;
 
                 var sumdifference = annualSalary - sum;
 
-                if (sumdifference > rangeDifference)
+                if (rangeDifference.HasValue && sumdifference > rangeDifference)
                 {
-                    sum += rangeDifference;
-                    taxSum += rangeDifference * (decimal)(tableEntry.TaxRate/100);
+                    sum += rangeDifference.Value;
+                    taxSum += rangeDifference.Value * (decimal)(tableEntry.TaxRate/100);
                 }
                 else
                 {
