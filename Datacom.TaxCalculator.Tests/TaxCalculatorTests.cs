@@ -143,5 +143,7 @@ namespace Datacom.TaxCalculator.Tests
             Assert.Equal(userTax.SuperAmount, 408.33M);
 
         }
+
+       
     }
 }

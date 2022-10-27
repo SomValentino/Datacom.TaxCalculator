@@ -39,8 +39,10 @@ namespace Datacom.TaxCalculator.Infrastructure.Validation
                 throw new CsvInvaildEntryException($"Cannot parse annual salary as an invalid value was passed at: {numline}");
             }
             else userTax.AnnualSalary = result;
+
+            var textvalue = values.Length >= 4 && values[3].EndsWith("%") ? values[3].Substring(0, values[3].Length - 1) : values[3];
             decimal superRate = 0.0M;
-            if (values.Length >= 4 && !decimal.TryParse(values[3].Substring(0, values[3].Length - 1), out superRate))
+            if (!decimal.TryParse(textvalue, out superRate))
             {
                 throw new CsvInvaildEntryException($"Cannot parse super rate as an invalid value was passed at: {numline}");
             }
@@ -48,7 +50,7 @@ namespace Datacom.TaxCalculator.Infrastructure.Validation
             {
                 throw new CsvInvaildEntryException($"Super Rate must be between 0 and 50 percent inclusive at line : {numline}");
             }
-            else userTax.SuperRate = decimal.Parse(values[3].Substring(0, values[3].Length - 1));
+            else userTax.SuperRate = superRate;
 
             if (values.Length >= 5 && (string.IsNullOrWhiteSpace(values[4]) || string.IsNullOrEmpty(values[4])))
             {
