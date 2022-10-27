@@ -26,6 +26,7 @@
             <br/><br/>
             @if(@Model.Model.NumberOfSuccessfulReads > 0)
             {
+                <p>Download output csv below:</p><br/>
                 <span><a asp-action="Download"
                             asp-route-filename="@Model.Model.OutputFileName">
                             @Model.Model.OutputFileName

@@ -32,7 +32,7 @@ namespace Datacom.TaxCalculator.Tests
 
             var batchProcessResult = await taxManger.BatchProcessAsync("input.csv");
 
-            Assert.Equal(batchProcessResult.NumberOfSuccessfulReads, 4);
+            Assert.Equal(batchProcessResult.NumberOfSuccessfulReads, 5);
             Assert.Equal(batchProcessResult.NumberOfFailedReads, 6);
             Assert.Equal(batchProcessResult.ErrorMessage, "Csv entry cannot be empty or whitespace at line: 1\n" +
                 "Pay period has an invalid month value at line: 4\n" +
