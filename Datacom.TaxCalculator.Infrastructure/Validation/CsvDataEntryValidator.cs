@@ -1,6 +1,7 @@
 ﻿using Datacom.TaxCalculator.Domain.Entities;
 using Datacom.TaxCalculator.Domain.Exceptions;
 using Datacom.TaxCalculator.Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,12 @@ namespace Datacom.TaxCalculator.Infrastructure.Validation
 {
     public class CsvDataEntryValidator : IDataValidator
     {
+        private readonly decimal _maxSuperRate;
+
+        public CsvDataEntryValidator(IConfiguration configuration)
+        {
+            _maxSuperRate = decimal.Parse(configuration["MaxSuperRate"]);
+        }
         public UserTax Validate(string[] values, int numline)
         {
             var userTax = new UserTax();
@@ -46,7 +53,7 @@ namespace Datacom.TaxCalculator.Infrastructure.Validation
             {
                 throw new CsvInvaildEntryException($"Cannot parse super rate as an invalid value was passed at: {numline}");
             }
-            else if (superRate < 0.0M || superRate > 50.0M)
+            else if (superRate < 0.0M || superRate > _maxSuperRate)
             {
                 throw new CsvInvaildEntryException($"Super Rate must be between 0 and 50 percent inclusive at line : {numline}");
             }

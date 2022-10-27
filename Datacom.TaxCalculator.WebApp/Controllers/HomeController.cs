@@ -49,7 +49,7 @@ namespace Datacom.TaxCalculator.WebApp.Controllers
                     return View(model);
                 }
 
-                var fileName = Path.GetFileNameWithoutExtension(file.FileName) + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
+                var fileName = Path.GetFileNameWithoutExtension(file.FileName) + DateTime.Now.ToString("yyyyMMddhhmmssmmm") + ".csv";
                 var inputfilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", fileName);
 
                 using var stream = new FileStream(inputfilePath, FileMode.Create);

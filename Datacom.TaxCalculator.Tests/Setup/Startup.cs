@@ -29,7 +29,8 @@ namespace Datacom.TaxCalculator.Tests.Setup
                 "{\"upper\": 48000,\"lower\":14000,\"taxRate\":17.5}, " +
                 "{\"upper\": 70000,\"lower\":48000,\"taxRate\":30}," +
                 "{\"upper\": 180000,\"lower\":70000,\"taxRate\":33}," +
-                "{\"upper\": null,\"lower\":180000,\"taxRate\":39}]" }
+                "{\"upper\": null,\"lower\":180000,\"taxRate\":39}]" },
+                {"MaxSuperRate","50" }
             };
 
             var configuration = new ConfigurationBuilder()
