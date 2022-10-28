@@ -1,4 +1,5 @@
 # Datacom.TaxCalculator
+Solution has been written in .Net 6 Visual studio 2022.
 ## Assumptions
 The assumptions made on this project are as follows:
 * One file will be processed at a time.
