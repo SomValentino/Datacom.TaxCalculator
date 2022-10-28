@@ -3,7 +3,7 @@ Solution has been written in .Net 6 Visual studio 2022.
 ## Assumptions
 The assumptions made on this project are as follows:
 * One file will be processed at a time.
-* There is already cnetralized logging system with kibana via serilog elastic search engine.
+* There is already centralized logging system with kibana via serilog elastic search engine.
 * Only CSV files are allowed for upload
 * The size of csv file to upload should be of size 5MB or less
 * For testing purpose csv files are saved to web server event though this is not ideal for production environment.
