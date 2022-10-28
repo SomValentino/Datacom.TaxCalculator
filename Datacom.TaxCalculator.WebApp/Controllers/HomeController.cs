@@ -9,13 +9,11 @@ namespace Datacom.TaxCalculator.WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IFileProvider _fileProvider;
         private readonly ITaxManager _taxManager;
 
-        public HomeController(IFileProvider fileProvider,ITaxManager TaxManager, ILogger<HomeController> logger)
+        public HomeController(ITaxManager TaxManager, ILogger<HomeController> logger)
         {
             _logger = logger;
-            _fileProvider = fileProvider;
             _taxManager = TaxManager;
         }
 
