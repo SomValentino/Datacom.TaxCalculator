@@ -11,12 +11,12 @@ namespace Datacom.TaxCalculator.Infrastructure.Data
 {
     public class CsvDataContext : IDataContext
     {
-        private readonly IDataValidator _dataValidator;
+        private readonly IValidatorManager _validatorManager;
         private readonly ILogger<CsvDataContext> _logger;
 
-        public CsvDataContext(IDataValidator dataValidator, ILogger<CsvDataContext> logger)
+        public CsvDataContext(IValidatorManager validatorManager, ILogger<CsvDataContext> logger)
         {
-            _dataValidator = dataValidator;
+            _validatorManager = validatorManager;
             _logger = logger;
         }
         public async Task<CsvEntryData> Read(string source)
@@ -40,7 +40,7 @@ namespace Datacom.TaxCalculator.Infrastructure.Data
                         }
                         var values = line.Split(',');
 
-                        UserTax userTax = _dataValidator.Validate(values, numline);
+                        UserTax userTax = _validatorManager.Validate(values, numline);
 
                         csvEntryData.UserTaxes.Add(userTax);
                     }

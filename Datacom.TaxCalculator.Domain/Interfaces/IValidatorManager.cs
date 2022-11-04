@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Datacom.TaxCalculator.Domain.Interfaces
 {
-    public interface IDataValidator
+    public interface IValidatorManager
     {
-        void Validate(string[] input, int line, UserTax user);
+        UserTax Validate(string[] values, int numline);
     }
 }
