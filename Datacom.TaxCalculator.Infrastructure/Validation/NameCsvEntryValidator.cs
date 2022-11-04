@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Datacom.TaxCalculator.Infrastructure.Validation
 {
-    public class CsvNameValidator : BaseCsvEntryValidator
+    public class NameCsvEntryValidator : BaseCsvEntryValidator
     {
         public override void Validate(string[] values, int numline, UserTax userTax)
         {
